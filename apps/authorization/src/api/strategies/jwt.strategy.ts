@@ -2,9 +2,9 @@ import * as moment from 'moment';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 
-import { ConfigService } from '../../config/config.service';
 import { MessagingService } from '../../messaging/messaging.service';
 import { DecodedToken, UserRecord } from '../api.types';
 

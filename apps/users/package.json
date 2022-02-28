@@ -26,7 +26,7 @@
     "setup:db": "ts-node src/setup.ts schema:create",
     "image:build": "docker build . --file Dockerfile --tag appcompass/users-service:latest",
     "image:push": "docker push appcompass/users-service:latest",
-    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/.bin/typeorm --config src/db/cli-config.ts",
+    "typeorm": "ts-node -r tsconfig-paths/register ../../node_modules/.bin/typeorm --config src/db/cli-config.ts",
     "deps:check": "depcruise --validate .dependency-cruiser.json src",
     "test:unit": "jest --config ./test/jest-unit.json",
     "test:watch": "jest --watch",
@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "@nestjs/common": "^8.2.6",
+    "@nestjs/config": "^1.2.0",
     "@nestjs/core": "^8.2.6",
     "@nestjs/jwt": "^8.0.0",
     "@nestjs/microservices": "^8.2.6",

@@ -19,8 +19,8 @@ export class AuthService {
     this.logger.setContext(this.constructor.name);
   }
 
-  async setPassword(password): Promise<string> {
-    return await bcrypt.hash(password, this.saltRounds);
+  setPassword(password): string {
+    return bcrypt.hashSync(password, this.saltRounds);
   }
 
   async validateUser(email: string, pass: string): Promise<AuthenticatedUser | null> {
@@ -29,7 +29,7 @@ export class AuthService {
       active: true
     });
     if (!user || !user.password) return null;
-    if (await bcrypt.compare(pass, user.password)) {
+    if (bcrypt.compareSync(pass, user.password)) {
       user.permissions = await this.messagingService.sendAsync('authorization.user.get-permission-names', {
         userId: user.id
       });

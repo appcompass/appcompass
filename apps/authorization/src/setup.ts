@@ -60,15 +60,15 @@ const commands = {
     client.close();
     try {
       writeFileSync(
-        '.envrc',
+        '.env',
         `
-export SERVICE_NAME=authorization
-export SERVICE_PORT=3020
-export ENV=local
-export PUBLIC_KEY=${JSON.stringify(publicKey)}
-export APP_CONFIG='${appConfig}'
-export INTERSERVICE_TRANSPORT_CONFIG='${interServiceTransportConfig}'
-export DB_CONFIG='${dbConfig}'
+SERVICE_NAME=authorization
+SERVICE_PORT=3020
+ENV=local
+PUBLIC_KEY=${JSON.stringify(publicKey)}
+APP_CONFIG='${appConfig}'
+INTERSERVICE_TRANSPORT_CONFIG='${interServiceTransportConfig}'
+DB_CONFIG='${dbConfig}'
 `
       );
     } catch (error) {

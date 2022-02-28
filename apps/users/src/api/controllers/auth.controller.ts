@@ -1,10 +1,10 @@
-import { MessagingService } from 'src/messaging/messaging.service';
 import { getConnection } from 'typeorm';
 
 import { Body, ConsoleLogger, Controller, Get, Post, Query, Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiNotFoundResponse, ApiUnprocessableEntityResponse } from '@nestjs/swagger';
 
+import { MessagingService } from '../../messaging/messaging.service';
 import { notFoundResponseOptions, unprocessableEntityResponseOptions } from '../api.contract-shapes';
 import { ConfirmRegistrationDto } from '../dto/auth-confirm-registration.dto';
 import { ForgotPasswordDto } from '../dto/auth-forgot-password.dto';

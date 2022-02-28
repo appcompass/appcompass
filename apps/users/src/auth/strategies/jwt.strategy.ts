@@ -3,10 +3,10 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { getManager } from 'typeorm';
 
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 
 import { UsersService } from '../../api/services/users.service';
-import { ConfigService } from '../../config/config.service';
 import { DecodedToken } from '../auth.types';
 
 @Injectable()

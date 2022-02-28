@@ -4,7 +4,9 @@
       "name": "no-circular",
       "severity": "warn",
       "comment": "This dependency is part of a circular relationship. You might want to revise your solution (i.e. use dependency inversion, make sure the modules have a single responsibility) ",
-      "from": { "pathNot": "\\.entity\\.ts$" },
+      "from": {
+        "pathNot": "\\.entity\\.ts$"
+      },
       "to": {
         "pathNot": "\\.entity\\.ts$",
         "circular": true
@@ -143,7 +145,7 @@
     },
     "tsPreCompilationDeps": true,
     "tsConfig": {
-      "fileName": "./tsconfig.json"
+      "fileName": "./tsconfig.build.json"
     }
   }
 }

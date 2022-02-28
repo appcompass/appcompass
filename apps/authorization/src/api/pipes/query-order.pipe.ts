@@ -1,6 +1,6 @@
-import { DBNamingStrategy } from 'src/db/naming.strategy';
-
 import { Injectable, PipeTransform } from '@nestjs/common';
+
+import { DBNamingStrategy } from '../../db/naming.strategy';
 
 @Injectable()
 export class QueryOrderPipe implements PipeTransform {

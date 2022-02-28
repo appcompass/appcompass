@@ -1,15 +1,14 @@
 import { firstValueFrom } from 'rxjs';
 
 import { Injectable, OnApplicationBootstrap, OnApplicationShutdown } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { ClientProxy, ClientProxyFactory } from '@nestjs/microservices';
-
-import { MessagingConfigService } from './messaging.config';
 
 @Injectable()
 export class MessagingService implements OnApplicationShutdown, OnApplicationBootstrap {
   private eventsClient: ClientProxy;
-  constructor(private readonly configService: MessagingConfigService) {
-    this.eventsClient = ClientProxyFactory.create(this.configService.eventsConfig);
+  constructor(private readonly configService: ConfigService) {
+    this.eventsClient = ClientProxyFactory.create(this.configService.get('INTERSERVICE_TRANSPORT_CONFIG'));
   }
 
   send<R, I = unknown>(pattern: string, data: I) {

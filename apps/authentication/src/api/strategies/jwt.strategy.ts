@@ -2,18 +2,18 @@ import * as moment from 'moment';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 
 import { MessagingService } from '../../messaging/messaging.service';
-import { AuthConfigService } from '../auth-config.service';
 import { AuthenticatedUser, DecodedToken } from '../auth.types';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(readonly config: AuthConfigService, readonly messagingService: MessagingService) {
+  constructor(readonly configService: ConfigService, readonly messagingService: MessagingService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: config.publicKey
+      secretOrKey: configService.get('PUBLIC_KEY')
     });
   }
 

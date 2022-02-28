@@ -1,0 +1,60 @@
+{
+  "name": "appcompass",
+  "version": "0.0.0",
+  "description": "AppCompass Monorepo",
+  "author": "Jubair Saidi",
+  "repository": "github:appcompass/appcompass",
+  "homepage": "https://github.com/appcompass/appcompass",
+  "bugs": {
+    "url": "https://github.com/appcompass/appcompass/issues"
+  },
+  "funding": {
+    "type": "patreon",
+    "url": "https://www.patreon.com/jubeizon"
+  },
+  "license": "MIT",
+  "workspaces": [
+    "libs/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "start:dev": "turbo run start:dev --parallel",
+    "start:debug": "turbo run start:debug --parallel",
+    "deps:check": "turbo run deps:check",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\" && eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "test:unit": "turbo run test:unit",
+    "test:watch": "turbo run test:watch",
+    "test:cov": "turbo run test:cov",
+    "test:debug": "turbo run test:debug",
+    "test:e2e": "turbo run test:e2e"
+  },
+  "dependencies": {
+    "@nestjs/common": "^8.4.0",
+    "@nestjs/config": "^1.2.0",
+    "@nestjs/typeorm": "^8.0.3",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "typeorm": "^0.2.45"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.4.1",
+    "@types/eslint-plugin-prettier": "^3.1.0",
+    "@types/node": "^17.0.21",
+    "@types/prettier": "^2.4.4",
+    "@types/rimraf": "^3.0.2",
+    "@typescript-eslint/eslint-plugin": "5.12.1",
+    "@typescript-eslint/parser": "5.12.1",
+    "eslint": "^8.9.0",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.5.1",
+    "turbo": "^1.1.6"
+  },
+  "engines": {
+    "npm": ">=8.5.0",
+    "node": ">=16.13.0"
+  },
+  "packageManager": "npm@8.5.1"
+}

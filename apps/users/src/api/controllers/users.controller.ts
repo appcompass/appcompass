@@ -1,4 +1,3 @@
-import { PermissionsGuard } from 'src/auth/guards/permissions.guard';
 import { getConnection } from 'typeorm';
 
 import {
@@ -21,6 +20,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiUnauthorizedResponse, ApiUnprocessableEntityResponse } from '@nestjs/swagger';
 
 import { Permissions } from '../../auth/decorators/permissions.decorator';
+import { PermissionsGuard } from '../../auth/guards/permissions.guard';
 import { unauthorizedResponseOptions, unprocessableEntityResponseOptions } from '../api.contract-shapes';
 import { OrderQuery } from '../api.types';
 import { CreateUserPayload } from '../dto/user-create.dto';

@@ -142,7 +142,7 @@
     },
     "tsPreCompilationDeps": true,
     "tsConfig": {
-      "fileName": "./tsconfig.json"
+      "fileName": "./tsconfig.build.json"
     }
   }
 }

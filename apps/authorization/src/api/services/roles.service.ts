@@ -1,7 +1,7 @@
-import { ConfigService } from 'src/config/config.service';
 import { EntityManager, FindConditions, ObjectLiteral } from 'typeorm';
 
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 import { FilterAllQuery, ResultsAndTotal } from '../api.types';
 import { RegisterRolesPayload } from '../dto/register-roles.dto';

@@ -1,4 +1,5 @@
 import { useContainer } from 'class-validator';
+import expressRateLimit, { Options } from 'express-rate-limit';
 import * as helmet from 'helmet';
 
 import {
@@ -8,17 +9,15 @@ import {
   ValidationError,
   ValidationPipe
 } from '@nestjs/common';
+import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
+import { ConfigService } from '@nestjs/config';
 import { NestFactory, Reflector } from '@nestjs/core';
+import { ClientOptions } from '@nestjs/microservices';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { AppModule } from './app.module';
-import { AppConfig, ConfigService } from './config/config.service';
-import { MessagingConfigService } from './messaging/messaging.config';
 import { MessagingService } from './messaging/messaging.service';
 import { roles } from './service.data';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const rateLimit = require('express-rate-limit');
 
 Error.stackTraceLimit = Infinity;
 
@@ -52,8 +51,8 @@ async function addSwaggerDocs(app: INestApplication, serviceName: string) {
   SwaggerModule.setup('docs', app, document);
 }
 
-function applySecurity(app: INestApplication, appConfig: AppConfig) {
-  app.enableCors(appConfig.corsOptions);
+function applySecurity(app: INestApplication, corsOptions: CorsOptions, rateLimit: Options) {
+  app.enableCors(corsOptions);
 
   app.use(helmet.contentSecurityPolicy());
   app.use(helmet.crossOriginEmbedderPolicy());
@@ -71,12 +70,11 @@ function applySecurity(app: INestApplication, appConfig: AppConfig) {
   app.use(helmet.referrerPolicy());
   app.use(helmet.xssFilter());
 
-  app.use(rateLimit(appConfig.rateLimit));
+  app.use(expressRateLimit(rateLimit));
 }
 
-async function startApp(app: INestApplication, servicePort: number) {
-  const messagingConfigService = app.get(MessagingConfigService);
-  app.connectMicroservice(messagingConfigService.eventsConfig);
+async function startApp(app: INestApplication, servicePort: number, eventsConfig: ClientOptions) {
+  app.connectMicroservice(eventsConfig);
 
   await app.startAllMicroservices();
   await app.listen(servicePort);
@@ -86,14 +84,15 @@ async function bootstrap() {
   const app = await createApp();
   const configService = app.get(ConfigService);
   const serviceName = configService.get('SERVICE_NAME');
-  const appConfig = configService.get('APP_CONFIG');
   const servicePort = configService.get('SERVICE_PORT');
+  const eventsConfig = configService.get('INTERSERVICE_TRANSPORT_CONFIG');
+  const { corsOptions, rateLimit } = configService.get('APP_CONFIG');
 
-  applySecurity(app, appConfig);
+  applySecurity(app, corsOptions, rateLimit);
   applyValidators(app);
   await addSwaggerDocs(app, serviceName);
 
-  await startApp(app, servicePort);
+  await startApp(app, servicePort, eventsConfig);
 
   app
     .get(MessagingService)

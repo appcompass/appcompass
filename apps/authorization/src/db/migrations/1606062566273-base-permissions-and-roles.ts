@@ -2,7 +2,6 @@ import { MigrationInterface, QueryRunner } from 'typeorm';
 
 import { Permission } from '../../api/entities/permission.entity';
 import { Role } from '../../api/entities/role.entity';
-import { ConfigService } from '../../config/config.service';
 
 export const systemPermissions = [
   {
@@ -98,14 +97,11 @@ export const systemPermissions = [
 ];
 export class basePermissionsAndRoles1606062566273 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    const config = new ConfigService();
-    const { schema } = config.get('DB_CONFIG');
-
     const permissionRepo = queryRunner.manager.getRepository(Permission);
 
-    const [{ id }] = await queryRunner.query(
-      `insert into "${schema}"."roles" ("name", "label", "description") VALUES ('authorization.admin', 'Authorization Admin', 'Platform Authorization Administrator') RETURNING "id"`
-    );
+    const [{ id }] = await queryRunner.query(`
+      insert into "users"."roles" ("name", "label", "description") VALUES ('authorization.admin', 'Authorization Admin', 'Platform Authorization Administrator') RETURNING "id"
+    `);
 
     const permissions = systemPermissions.map((data) => permissionRepo.create({ ...data, roles: [{ id }] }));
 

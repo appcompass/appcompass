@@ -10,7 +10,7 @@ AppCompass Authorization Service provides authorization resources to a platform 
 
 ### For Local Development
 
-If you use a tool like direnv to set project env vars, you don't need to run the below command.  However you will need to look at the `.env.example` file for the env vars you need set for the service to run properly.
+If you use a tool like direnv to set project env vars, you don't need to run the below command. However you will need to look at the `.env.example` file for the env vars you need set for the service to run properly.
 
 If you wish to use a dotenv file run the following:
 
@@ -20,7 +20,7 @@ $ npm run generate:dotenv
 
 ```
 
-Then modify the `local.env` file as needed if the default values don't work for you.  Specifically the database connection variables.
+Then modify the `local.env` file as needed if the default values don't work for you. Specifically the database connection variables.
 
 Once you have your environment variables set, run the following:
 

@@ -1,4 +1,19 @@
-import { ConfigService } from '../config/config.service';
-import { DBConfigService } from './db-config.service';
+import { ConfigService } from '@nestjs/config';
 
-export = new DBConfigService(new ConfigService()).config;
+import { DBNamingStrategy } from './naming.strategy';
+
+const configService = new ConfigService();
+
+export = {
+  logging: 'all',
+  ...JSON.parse(configService.get('DB_CONFIG')),
+  schema: 'auth',
+  namingStrategy: new DBNamingStrategy(),
+  entities: [`${__dirname}/../**/*.entity{.js,.ts}`],
+  migrations: [`${__dirname}/migrations/*{.js,.ts}`],
+  cli: {
+    entitiesDir: 'src/db/entities',
+    migrationsDir: 'src/db/migrations',
+    subscribersDir: 'src/db/subscribers'
+  }
+};

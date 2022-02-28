@@ -1,13 +1,13 @@
 import { Controller } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { EventPattern, MessagePattern, Payload } from '@nestjs/microservices';
 
-import { AuthConfigService } from '../auth-config.service';
 import { AuthenticatedUser } from '../auth.types';
 import { AuthService } from '../services/auth.service';
 
 @Controller()
 export class InterServiceController {
-  constructor(private readonly authService: AuthService, private readonly authConfigService: AuthConfigService) {}
+  constructor(private readonly authService: AuthService, private readonly configService: ConfigService) {}
 
   @MessagePattern('authentication.user.login-by-id')
   async loginUserById(@Payload() id: number) {
@@ -50,6 +50,6 @@ export class InterServiceController {
 
   @EventPattern('authentication.public-key')
   sendPublicKey() {
-    return this.authConfigService.publicKey.toString();
+    return this.configService.get('PUBLIC_KEY').toString();
   }
 }
