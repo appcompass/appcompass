@@ -27,6 +27,7 @@ jobs:
         id: git_tag
         run: echo ::set-output name=GIT_HASH::$(git rev-parse --short HEAD)
       - name: Cache Docker layers
+        if: steps.changed-service.outputs.changed == 'true'
         uses: actions/cache@v2
         with:
           path: /tmp/.buildx-cache
@@ -34,26 +35,31 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
       - name: Login to Docker Hub
+        if: steps.changed-service.outputs.changed == 'true'
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
       - name: Set up Docker Buildx
+        if: steps.changed-service.outputs.changed == 'true'
         id: buildx
         uses: docker/setup-buildx-action@v1
       - name: Build and push
+        if: steps.changed-service.outputs.changed == 'true'
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: ./apps/${{ matrix.service }}/
-          file: ./apps/${{ matrix.service }}/Dockerfile
+          context: ./
+          file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           build-args: |
+            APP_NAME=${{ matrix.service }}
             GIT_HASH=${{ steps.git_tag.outputs.GIT_HASH }}
             GIT_TAG=latest
           tags:  appcompass/${{ matrix.service }}-service:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       - name: Image digest
+        if: steps.changed-service.outputs.changed == 'true'
         run: echo ${{ steps.docker_build.outputs.digest }}
