@@ -1,36 +1,17 @@
 # AppCompass Users Service
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/e384a77e714dec5366e7/maintainability)](https://codeclimate.com/github/appcompass/users-microservice/maintainability)
-![example workflow](https://github.com/appcompass/users-microservice/actions/workflows/code-quality-and-tests.yml/badge.svg?branch=main)
+[![Maintainability](https://api.codeclimate.com/v1/badges/d5bd949d8cf32e128caa/maintainability)](https://codeclimate.com/github/appcompass/appcompass/maintainability)
+![Code Quality and Tests](https://github.com/appcompass/appcompass/actions/workflows/code-quality-and-tests.yml/badge.svg?branch=main)
 
 ## Description
 
-AppCompass Users Service provides users resources to a platform that uses this service's interface contract for use.
+AppCompass Monorepo for all of our Open Source services and libraries.
 
 ## First Time Setup
 
 ### For Local Development
 
-If you use a tool like direnv to set project env vars, you don't need to run the below command. However you will need to look at the `.env.example` file for the env vars you need set for the service to run properly.
-
-If you wish to use a dotenv file run the following:
-
-```bash
-
-$ npm run generate:dotenv
-
-```
-
-Then modify the `local.env` file as needed if the default values don't work for you. Specifically the database connection variables.
-
-Once you have your environment variables set, run the following:
-
-```bash
-
-$ npm install
-$ npm run schema:create
-
-```
+TODO: Update docs
 
 ## Running the app
 
@@ -60,4 +41,4 @@ $ npm run test:cov
 
 ## License
 
-AppCompass Users Service is [MIT licensed](LICENSE).
+This AppCompass Repository is [MIT licensed](LICENSE).
