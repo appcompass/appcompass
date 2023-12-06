@@ -1,53 +1,61 @@
-name: Build and Push Latest to Docker Hub
+name: Build and Deploy APIs
 on:
   push:
+    paths:
+      - apps/**
+      - libs/**
+      - .github/workflows/build-on-merge-api.yml
+      - package.json
+      - package-lock.json
+      - Dockerfile
     branches:
       - main
-    paths:
-      - 'apps/**'
 
 jobs:
-  build:
-    name: ⚙️ Docker Build, Tag, and Push
+  build-push-and-deploy:
+    name: ⚙️ (${{ matrix.service }}) Build and Deploy
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        service: [authentication, authorization, users]
+        service:
+          [authentication, authorization, users]
     steps:
       - name: Check Out Repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 100
-      - uses: marceloprado/has-changed-path@v1
-        id: changed-service
-        with:
-          paths: apps/${{ matrix.service }}
+      - name: install jq
+        run: sudo apt-get install jq
+      - name: Check for Changes
+        id: changes
+        run: |
+          echo HAS_CHANGES=$(git diff --quiet HEAD~$(echo '${{ toJson(github.event.commits.*.timestamp) }}' | jq '. | length') HEAD -- apps/${{ matrix.service }} libs/common .github/workflows package.json package-lock.json Dockerfile || echo $?) >> $GITHUB_OUTPUT
       - name: Get git Tag
-        if: steps.changed-service.outputs.changed == 'true'
         id: git_tag
-        run: echo ::set-output name=GIT_HASH::$(git rev-parse --short HEAD)
+        run: echo GIT_HASH=$(echo ${{ github.sha }} | cut -c 1-8) >> $GITHUB_OUTPUT
       - name: Cache Docker layers
-        if: steps.changed-service.outputs.changed == 'true'
-        uses: actions/cache@v2
+        if: steps.changes.outputs.HAS_CHANGES == '1'
+        uses: actions/cache@v3
         with:
-          path: /tmp/.buildx-cache
+          path: /tmp/${{ matrix.service }}/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
-      - name: Login to Docker Hub
-        if: steps.changed-service.outputs.changed == 'true'
-        uses: docker/login-action@v1
+      - name: Login to Docker
+        if: steps.changes.outputs.HAS_CHANGES == '1'
+        uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+          registry: ${{ secrets.DOCKER_REGISTRY_URL }}
+          username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+          password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
       - name: Set up Docker Buildx
-        if: steps.changed-service.outputs.changed == 'true'
+        if: steps.changes.outputs.HAS_CHANGES == '1'
         id: buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
       - name: Build and push
-        if: steps.changed-service.outputs.changed == 'true'
+        if: steps.changes.outputs.HAS_CHANGES == '1'
         id: docker_build
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: ./
           file: ./Dockerfile
@@ -57,9 +65,14 @@ jobs:
             APP_NAME=${{ matrix.service }}
             GIT_HASH=${{ steps.git_tag.outputs.GIT_HASH }}
             GIT_TAG=latest
-          tags:  appcompass/${{ matrix.service }}-service:latest
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
+          tags: ${{ secrets.DOCKER_REGISTRY_URL }}/${{ matrix.service }}:latest
+          cache-from: type=local,src=/tmp/${{ matrix.service }}/.buildx-cache
+          cache-to: type=local,dest=/tmp/${{ matrix.service }}/.buildx-cache-new,mode=max
+      - name: Move cache
+        if: steps.changes.outputs.HAS_CHANGES == '1'
+        run: |
+          rm -rf /tmp/${{ matrix.service }}/.buildx-cache
+          mv /tmp/${{ matrix.service }}/.buildx-cache-new /tmp/${{ matrix.service }}/.buildx-cache
       - name: Image digest
-        if: steps.changed-service.outputs.changed == 'true'
+        if: steps.changes.outputs.HAS_CHANGES == '1'
         run: echo ${{ steps.docker_build.outputs.digest }}

@@ -1,8 +1,7 @@
 {
   "name": "appcompass",
-  "version": "0.0.0",
   "description": "AppCompass Monorepo",
-  "author": "Jubair Saidi",
+  "author": "Zia Saidi",
   "repository": "github:appcompass/appcompass",
   "homepage": "https://github.com/appcompass/appcompass",
   "bugs": {
@@ -10,51 +9,76 @@
   },
   "funding": {
     "type": "patreon",
-    "url": "https://www.patreon.com/jubeizon"
+    "url": "https://www.patreon.com/ziazon"
   },
   "license": "MIT",
-  "workspaces": [
-    "libs/*",
-    "apps/*"
+  "files": [
+    "dist"
   ],
+  "bin": {
+    "ac-cli": "./bin/cli.ts"
+  },
   "scripts": {
-    "build": "turbo run build",
-    "start:dev": "turbo run start:dev --parallel",
-    "start:debug": "turbo run start:debug --parallel",
-    "deps:check": "turbo run deps:check",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\" && eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test:unit": "turbo run test:unit",
-    "test:watch": "turbo run test:watch",
-    "test:cov": "turbo run test:cov",
-    "test:debug": "turbo run test:debug",
-    "test:e2e": "turbo run test:e2e"
+    "cli": "./bin/cli.ts",
+    "preinstall": "npx only-allow pnpm",
+    "build": "FORCE_COLOR=1 turbo run build",
+    "format": "FORCE_COLOR=1 turbo run format",
+    "start": "FORCE_COLOR=1 turbo run start",
+    "start:dev": "FORCE_COLOR=1 turbo run start:dev --parallel",
+    "start:debug": "FORCE_COLOR=1 turbo run start:debug --parallel",
+    "deps:check": "FORCE_COLOR=1 turbo run deps:check",
+    "lint": "FORCE_COLOR=1 turbo run lint",
+    "test:unit": "FORCE_COLOR=1 turbo run test:unit",
+    "test:watch": "FORCE_COLOR=1 turbo run test:watch",
+    "test:cov": "FORCE_COLOR=1 turbo run test:cov",
+    "test:debug": "FORCE_COLOR=1 turbo run test:debug",
+    "test:e2e": "FORCE_COLOR=1 turbo run test:e2e"
   },
   "dependencies": {
-    "@nestjs/common": "^8.4.0",
-    "@nestjs/config": "^1.2.0",
-    "@nestjs/typeorm": "^8.0.3",
-    "lodash": "^4.17.21",
-    "moment": "^2.29.1",
-    "typeorm": "^0.2.45"
+    "@appcompass/common": "workspace:*",
+    "@nestjs/common": "^10.0.0",
+    "@nestjs/config": "^3.1.1",
+    "@nestjs/core": "^10.0.0",
+    "@nestjs/platform-express": "^10.0.0",
+    "dayjs": "^1.11.10",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.8.1"
   },
   "devDependencies": {
-    "@types/eslint": "^8.4.1",
-    "@types/eslint-plugin-prettier": "^3.1.0",
-    "@types/node": "^17.0.21",
-    "@types/prettier": "^2.4.4",
-    "@types/rimraf": "^3.0.2",
-    "@typescript-eslint/eslint-plugin": "5.12.1",
-    "@typescript-eslint/parser": "5.12.1",
-    "eslint": "^8.9.0",
-    "eslint-config-prettier": "^8.4.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.5.1",
-    "turbo": "^1.1.6"
+    "@nestjs/cli": "^10.0.0",
+    "@nestjs/schematics": "^10.0.0",
+    "@nestjs/testing": "^10.0.0",
+    "@swc/cli": "^0.1.63",
+    "@swc/core": "^1.3.96",
+    "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.2",
+    "@types/node": "^20.3.1",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "chalk": "^4.1.2",
+    "commander": "^11.1.0",
+    "dotenv": "^16.3.1",
+    "eslint": "^8.42.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "format-imports": "^3.2.7",
+    "jest": "^29.5.0",
+    "npm-check-updates": "^16.14.6",
+    "ora": "^5.4.1",
+    "prettier": "^3.0.0",
+    "source-map-support": "^0.5.21",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.1.0",
+    "ts-loader": "^9.4.3",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "turbo": "^1.10.16",
+    "typescript": "^5.1.3"
   },
   "engines": {
-    "npm": ">=8.5.0",
-    "node": ">=16.13.0"
+    "npm": ">=10.2.4",
+    "node": ">=18.18.2"
   },
-  "packageManager": "npm@8.5.1"
+  "packageManager": "pnpm@8.10.5"
 }

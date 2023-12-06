@@ -1,27 +1,45 @@
-FROM node:16 as builder
-ARG APP_NAME
+FROM node:18-alpine as base
 
-WORKDIR /app
-COPY ./apps/$APP_NAME/package.json ./
-COPY ./package-lock.json ./
-RUN npm install -g npm
-RUN npm install
-RUN npm rebuild bcrypt --build-from-source
-COPY . .
-RUN npm run build --workspace=$APP_NAME && npm prune --production
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
 
-FROM node:16-stretch-slim
+# ===============================
+FROM base AS build
+COPY . /usr/src/app
+WORKDIR /usr/src/app
 
-ARG APP_NAME
+ARG GITHUB_TOKEN=""
+ENV GITHUB_TOKEN=$GITHUB_TOKEN
+
+RUN rm -rf /usr/src/app/libs
+RUN pnpm uninstall -w @appcompass/common
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
+RUN pnpm build
+
+
+# ===============================
+FROM base AS deploy
+COPY --from=build /usr/src/app /usr/src/app
+WORKDIR /usr/src/app
+
+ARG APP_NAME=""
+ARG GITHUB_TOKEN=""
+ENV GITHUB_TOKEN=$GITHUB_TOKEN
+
+RUN pnpm deploy --prod --no-optional --filter=$APP_NAME /prod/$APP_NAME
+
+# ===============================
+FROM base AS final
+
+ARG APP_NAME=""
+
+COPY --from=deploy /prod/$APP_NAME /prod/$APP_NAME
+WORKDIR /prod/$APP_NAME
+
 ARG GIT_HASH=""
 ARG GIT_TAG=""
-
-WORKDIR /app
-COPY --from=builder /app/apps/$APP_NAME/package.json /app/package.json
-COPY --from=builder /app/dist/apps/$APP_NAME /app/dist
-COPY --from=builder /app/node_modules /app/node_modules
-
 ENV GIT_HASH=${GIT_HASH}
 ENV GIT_TAG=${GIT_TAG}
 
-CMD ["npm", "run", "start:prod"]
+CMD [ "pnpm", "start:prod" ]

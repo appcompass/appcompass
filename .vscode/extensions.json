@@ -1,5 +1,7 @@
 {
   "recommendations": [
-    "mike-co.import-sorter"
+    "dozerg.tsimportsorter",
+    "vue.vscode-typescript-vue-plugin",
+    "vue.volar"
   ]
 }

@@ -3,35 +3,21 @@
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,
-    "noUnusedLocals": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": [
-      "es2019",
-      "esnext.asynciterable"
-    ],
-    "target": "es2019",
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2021",
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
-    "paths": {
-      "@appcompass/messaging": [
-        "libs/messaging/src"
-      ],
-      "@appcompass/messaging/*": [
-        "libs/messaging/src/*"
-      ],
-      "@appcompass/db": [
-        "libs/db/src"
-      ],
-      "@appcompass/db/*": [
-        "libs/db/src/*"
-      ]
-    }
-  },
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "strictNullChecks": false,
+    "moduleResolution": "node",
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false
+  }
 }
