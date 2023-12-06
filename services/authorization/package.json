@@ -1,0 +1,62 @@
+{
+  "name": "authorization",
+  "version": "1.0.1",
+  "description": "App Compass Authorization Service",
+  "author": "Zia Saidi",
+  "repository": "github:appcompass/authorization-microservice",
+  "homepage": "https://github.com/appcompass/authorization-microservice",
+  "bugs": {
+    "url": "https://github.com/appcompass/authorization-microservice/issues"
+  },
+  "funding": {
+    "type": "patreon",
+    "url": "https://www.patreon.com/jubeizon"
+  },
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "nest build",
+    "lint": "prettier --check \"src/**/*.ts\" \"test/**/*.ts\" && eslint \"{src,apps,libs,test}/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" && eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main.js",
+    "image:build": "docker build . --file Dockerfile --tag appcompass/authorization-service:latest",
+    "image:push": "docker push appcompass/authorization-service:latest",
+    "typeorm": "typeorm-ts-node-commonjs --dataSource src/db/cli-config.ts",
+    "deps:check": "depcruise --validate .dependency-cruiser.json src",
+    "test:unit": "jest --config ./test/jest-unit.json",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --config ./test/jest-unit.json --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "test",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "./coverage",
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "@appcompass/common": "workspace:^1.1.1",
+    "@nestjs/microservices": "^10.2.9",
+    "@nestjs/typeorm": "^10.0.1",
+    "pg": "^8.11.3",
+    "typeorm": "^0.3.17"
+  }
+}

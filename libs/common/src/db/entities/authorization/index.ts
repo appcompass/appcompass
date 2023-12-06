@@ -1,0 +1,9 @@
+export { AuditPermission } from './audit-permission.entity';
+export { AuditRolePermission } from './audit-role-permission.entity';
+export { AuditRole } from './audit-role.entity';
+export { AuditUserPermission } from './audit-user-permission.entity';
+export { AuditUserRole } from './audit-user-role.entity';
+export { Permission } from './permission.entity';
+export { Role } from './role.entity';
+export { UserPermission } from './user-permission.entity';
+export { UserRole } from './user-role.entity';

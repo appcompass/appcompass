@@ -1,0 +1,12 @@
+{
+  "type": "api",
+  "authKeys": [
+    "PUBLIC_KEY"
+  ],
+  "db": {
+    "schema": "auth"
+  },
+  "defaults": {
+    "SERVICE_PORT": 3020
+  }
+}
