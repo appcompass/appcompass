@@ -1,0 +1,14 @@
+///------------------------------------------------------------------------
+///		FUNCTIONS
+///------------------------------------------------------------------------
+
+// EM CALCULATION
+@use 'sass:math';
+
+$base-font: 18px !default;
+@function em($target, $context: $base-font) {
+  @if $target == 0 {
+    @return 0;
+  }
+  @return math.div($target, $context) + 0em;
+}

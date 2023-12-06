@@ -1,0 +1,101 @@
+@use 'sass:color';
+@use 'functions/functions';
+@use 'settings';
+
+/* ==========================================================================
+	STYLES
+=========================================================================== */
+
+///------------------------------------------------------------------------
+///		BUTTONS
+///------------------------------------------------------------------------
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px 20px;
+  line-height: 1.2;
+  font-size: functions.em(14px);
+  text-transform: uppercase;
+  transition: all 0.15s ease;
+  background-color: settings.$secondary-color;
+  color: #fff;
+  border-radius: 3px;
+  font-weight: bold;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.btn-small {
+  font-size: functions.em(12px);
+  padding: 5px 10px;
+}
+
+.btn:hover {
+  background-color: settings.$secondary-color-hover;
+  color: #fff;
+  text-decoration: none !important;
+}
+
+.btn-expand {
+  width: 100%;
+  display: block;
+  text-align: center;
+  max-width: 100%;
+}
+
+.btn-primary {
+  @extend .btn;
+}
+
+.btn-secondary {
+  @extend .btn;
+  background-color: settings.$primary-neutral-color;
+}
+
+///------------------------------------------------------------------------
+///		LINKS
+///------------------------------------------------------------------------
+.link-primary {
+  color: settings.$secondary-color;
+  &:hover {
+    color: color.adjust(settings.$secondary-color, $lightness: -15%);
+  }
+}
+
+.link-text-primary {
+  color: settings.$primary-text-color;
+}
+
+.link-text-secondary {
+  color: settings.$secondary-text-color;
+}
+
+.link-text-tertiary {
+  color: settings.$tertiary-text-color;
+}
+
+.link-red {
+  color: settings.$primary-red;
+  &:hover {
+    color: color.adjust(settings.$primary-red, $lightness: -15%);
+  }
+}
+
+.no-decoration {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.link-icon,
+.link-icon:hover {
+  text-decoration: none;
+}
+
+.link-icon [class^='icon-'],
+.link-icon [class*=' icon-'] {
+  margin-right: 2px;
+  position: relative;
+  top: 1px;
+}

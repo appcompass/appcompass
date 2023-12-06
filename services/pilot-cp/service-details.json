@@ -1,0 +1,12 @@
+{
+  "type": "ui",
+  "defaults": {
+    "SERVICE_PORT": 8080,
+    "SERVICE_NAME": "pilot-cp",
+    "APP_TITLE": "Pilot CP",
+    "HEADER_LOGO_URL": "https://appcompass.github.io/assets/images/content/logo.svg",
+    "LOGIN_LOGO_URL": "https://appcompass.github.io/assets/images/content/logo_color.svg",
+    "COPYRIGHT_TEXT": "© AppCompass. All Rights Reserved",
+    "SHOW_BUILT_WITH": true
+  }
+}

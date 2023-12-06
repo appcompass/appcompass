@@ -1,0 +1,44 @@
+@use 'functions/functions';
+@use 'settings';
+
+/* ==========================================================================
+    FOOTER
+=========================================================================== */
+
+/// VARIABLES ///
+
+////////////////
+
+.footer {
+  flex: 0 0 auto;
+  padding: 20px 20px 0;
+  color: settings.$secondary-text-color;
+  font-size: functions.em(14px);
+  color: settings.$tertiary-text-color;
+  border-top: 1px solid settings.$border-color;
+}
+
+.footer-company .footer-icons {
+  font-size: functions.em(16px, 14px);
+}
+
+.footer-company .icon-heart {
+  color: settings.$primary-red;
+}
+
+.footer-company a {
+  color: inherit;
+  &:hover {
+    color: settings.$secondary-color;
+  }
+}
+
+.footer-reports {
+  background-color: settings.$primary-bg-color;
+  text-align: left;
+  border-radius: 3px;
+  padding: 20px;
+  margin: 0 0 20px;
+  color: settings.$secondary-text-color;
+  white-space: pre-wrap;
+}

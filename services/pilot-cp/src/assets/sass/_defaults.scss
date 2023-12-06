@@ -1,0 +1,86 @@
+@use 'functions/functions';
+@use 'settings';
+
+/* ==========================================================================
+	DEFAULTS
+=========================================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: settings.$heading-color;
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+h1 {
+  font-weight: normal;
+  font-size: functions.em(28px);
+}
+
+h2 {
+  font-size: functions.em(16px);
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: functions.em(16px);
+}
+
+h4,
+h5,
+h6 {
+  font-size: functions.em(14px);
+}
+
+p,
+ul,
+ol,
+blockquote {
+  margin: 0 0 20px 0;
+}
+
+ul ul,
+ol ol {
+  //margin:0
+}
+
+a {
+  color: settings.$link-color;
+}
+
+a:hover {
+  color: settings.$hover-color;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  border: solid settings.$border-color;
+  border-width: 1px 0 0 0;
+}
+
+th {
+  border: solid settings.$border-color;
+  border-width: 0 0 1px;
+  font-size: functions.em(14px);
+  font-weight: normal;
+  text-transform: uppercase;
+  color: settings.$tertiary-text-color;
+  text-align: left;
+  padding: 5px;
+  vertical-align: top;
+}
+
+td {
+  color: settings.$secondary-text-color;
+  padding: 5px;
+  border: solid settings.$border-color;
+  border-width: 0 0 1px;
+  vertical-align: top;
+}
