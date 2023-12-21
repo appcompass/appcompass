@@ -1,5 +1,5 @@
 import { Exclude, Transform } from 'class-transformer';
-import { IsBoolean, IsEmail, IsString, validateOrReject } from 'class-validator';
+import { IsBoolean, IsEmail, IsString, ValidateIf, validateOrReject } from 'class-validator';
 import { Dayjs } from 'dayjs';
 
 export class TokenUser {
@@ -28,10 +28,12 @@ export class TokenUser {
 
   @Transform(({ value }) => value?.format() || null)
   @IsString()
+  @ValidateIf((object, value) => value !== null)
   activatedAt: Dayjs;
 
   @Transform(({ value }) => value?.format() || null)
   @IsString()
+  @ValidateIf((object, value) => value !== null)
   lastLogin: Dayjs;
 
   @Transform(({ value }) => value?.format() || null)

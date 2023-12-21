@@ -3,5 +3,6 @@
   "autoFormat": "onSave",
   "quoteMark": "single",
   "trailingComma": "none",
+  "maxLineLength": 120,
   "wrappingStyle": "prettier"
 }
