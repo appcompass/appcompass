@@ -7,7 +7,7 @@ import {
   unauthorizedResponseOptions,
   unprocessableEntityResponseOptions
 } from '@appcompass/common';
-import { AuditPermission, AuditRole, AuditUserRole } from '@appcompass/common/entities';
+import { AuditPermission, AuditRole, AuditUserRole } from '@appcompass/entities';
 import { ConsoleLogger, Controller, Get, Query, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiUnauthorizedResponse, ApiUnprocessableEntityResponse } from '@nestjs/swagger';

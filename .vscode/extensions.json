@@ -1,7 +1,10 @@
 {
   "recommendations": [
-    "dozerg.tsimportsorter",
-    "vue.vscode-typescript-vue-plugin",
-    "vue.volar"
+    "Vue.volar",
+    "vitest.explorer",
+    "ms-playwright.playwright",
+    "dbaeumer.vscode-eslint",
+    "EditorConfig.EditorConfig",
+    "esbenp.prettier-vscode"
   ]
 }

@@ -11,7 +11,7 @@ import {
   unauthorizedResponseOptions,
   unprocessableEntityResponseOptions
 } from '@appcompass/common';
-import { Permission } from '@appcompass/common/entities';
+import { Permission } from '@appcompass/entities';
 import {
   Body,
   ConsoleLogger,

@@ -6,7 +6,7 @@ import {
   AuditRolePermission,
   AuditUserPermission,
   AuditUserRole
-} from '@appcompass/common/entities';
+} from '@appcompass/entities';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

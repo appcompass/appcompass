@@ -1,6 +1,14 @@
 {
   "baseBranch": "origin/main",
   "pipeline": {
+    "@appcompass/common#build": {
+      "dependsOn": [
+        "@appcompass/entities#build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
+    },
     "build": {
       "dependsOn": [
         "^build"
@@ -10,45 +18,10 @@
       ]
     },
     "build:deploy": {
+      "cache": false,
       "dependsOn": [
         "^build:deploy"
-      ],
-      "cache": false
-    },
-    "test:unit": {
-      "dependsOn": [
-        "@appcompass/common#build"
-      ],
-      "cache": false,
-      "outputs": []
-    },
-    "test:watch": {
-      "dependsOn": [
-        "@appcompass/common#build"
-      ],
-      "cache": false,
-      "persistent": true
-    },
-    "test:cov": {
-      "dependsOn": [
-        "@appcompass/common#build"
-      ],
-      "cache": false,
-      "outputs": []
-    },
-    "test:debug": {
-      "dependsOn": [
-        "@appcompass/common#build"
-      ],
-      "cache": false,
-      "outputs": []
-    },
-    "test:e2e": {
-      "dependsOn": [
-        "@appcompass/common#build"
-      ],
-      "cache": false,
-      "outputs": []
+      ]
     },
     "deps:check": {
       "outputs": []
@@ -61,35 +34,70 @@
       "persistent": true
     },
     "setup": {
+      "cache": false,
       "dependsOn": [
         "@appcompass/common#build"
       ],
-      "cache": false,
-      "outputs": []
-    },
-    "setup:env": {
-      "dependsOn": [
-        "@appcompass/common#build"
-      ],
-      "cache": false,
       "outputs": []
     },
     "setup:db": {
+      "cache": false,
       "dependsOn": [
         "@appcompass/common#build"
       ],
-      "cache": false,
       "outputs": []
     },
-    "start:dev": {
+    "setup:env": {
+      "cache": false,
       "dependsOn": [
         "@appcompass/common#build"
       ],
-      "cache": false,
-      "persistent": true
+      "outputs": []
     },
     "start:debug": {
       "cache": false,
+      "persistent": true
+    },
+    "start:dev": {
+      "cache": false,
+      "dependsOn": [
+        "@appcompass/common#build"
+      ],
+      "persistent": true
+    },
+    "test:cov": {
+      "cache": false,
+      "dependsOn": [
+        "@appcompass/common#build"
+      ],
+      "outputs": []
+    },
+    "test:debug": {
+      "cache": false,
+      "dependsOn": [
+        "@appcompass/common#build"
+      ],
+      "outputs": []
+    },
+    "test:e2e": {
+      "cache": false,
+      "dependsOn": [
+        "@appcompass/common#build"
+      ],
+      "outputs": []
+    },
+    "test:unit": {
+      "cache": false,
+      "dependsOn": [
+        "@appcompass/common#build"
+      ],
+      "outputs": []
+    },
+    "test:watch": {
+      "cache": false,
+      "dependsOn": [
+        "@appcompass/common#build"
+      ],
       "persistent": true
     }
   }

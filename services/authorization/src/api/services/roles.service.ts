@@ -1,7 +1,7 @@
 import { EntityManager, FindOptionsWhere, ObjectLiteral } from 'typeorm';
 
 import { FilterAllQuery, ResultsAndTotal } from '@appcompass/common';
-import { Permission, Role } from '@appcompass/common/entities';
+import { Permission, Role } from '@appcompass/entities';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 

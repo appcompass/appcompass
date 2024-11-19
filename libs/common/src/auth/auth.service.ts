@@ -1,10 +1,10 @@
 import * as bcrypt from 'bcrypt';
 import dayjs from 'dayjs';
 
+import { User } from '@appcompass/entities';
 import { ConsoleLogger, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { User } from '../db/entities';
 import { TokenUser } from '../dtos';
 import { MessagingService } from '../messaging';
 

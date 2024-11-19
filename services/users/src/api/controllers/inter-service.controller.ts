@@ -1,6 +1,6 @@
 import { DataSource, FindOptionsWhere } from 'typeorm';
 
-import { User } from '@appcompass/common/entities';
+import { User } from '@appcompass/entities';
 import { Body, ConsoleLogger, Controller, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiExcludeController } from '@nestjs/swagger';

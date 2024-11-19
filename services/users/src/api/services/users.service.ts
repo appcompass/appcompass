@@ -1,7 +1,7 @@
 import { EntityManager, FindOptionsWhere } from 'typeorm';
 
 import { FilterAllQuery, ResultsAndTotal } from '@appcompass/common';
-import { User } from '@appcompass/common/entities';
+import { User } from '@appcompass/entities';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

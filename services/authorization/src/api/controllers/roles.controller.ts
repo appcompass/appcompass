@@ -12,7 +12,7 @@ import {
   unauthorizedResponseOptions,
   unprocessableEntityResponseOptions
 } from '@appcompass/common';
-import { Permission, Role } from '@appcompass/common/entities';
+import { Permission, Role } from '@appcompass/entities';
 import {
   Body,
   ConsoleLogger,

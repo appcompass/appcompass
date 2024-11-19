@@ -1,6 +1,6 @@
 import { EntitySchema } from 'typeorm';
 
-import { AuditUserPermission as Entity } from '@appcompass/common/entities';
+import { AuditUserPermission as Entity } from '@appcompass/entities';
 
 export const AuditUserPermission = new EntitySchema<Entity>({
   name: 'AuditUserPermission',

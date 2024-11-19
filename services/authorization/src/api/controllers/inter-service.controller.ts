@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm';
 
-import { Permission, Role } from '@appcompass/common/entities';
+import { Permission, Role } from '@appcompass/entities';
 import { ConsoleLogger, Controller, Post, UseGuards } from '@nestjs/common';
 import { Payload } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';

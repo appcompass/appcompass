@@ -1,6 +1,6 @@
 import { EntitySchema } from 'typeorm';
 
-import { User as Entity } from '@appcompass/common/entities';
+import { User as Entity } from '@appcompass/entities';
 
 export const User = new EntitySchema<Entity>({
   name: 'User',

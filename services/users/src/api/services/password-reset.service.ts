@@ -1,6 +1,6 @@
 import { EntityManager, FindOptionsWhere } from 'typeorm';
 
-import { PasswordReset } from '@appcompass/common/entities';
+import { PasswordReset } from '@appcompass/entities';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

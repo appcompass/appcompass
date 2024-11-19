@@ -9,7 +9,7 @@ import {
   unauthorizedResponseOptions,
   unprocessableEntityResponseOptions
 } from '@appcompass/common';
-import { User } from '@appcompass/common/entities';
+import { User } from '@appcompass/entities';
 import {
   Body,
   ConsoleLogger,

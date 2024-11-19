@@ -1,7 +1,7 @@
 import { EntityManager, In } from 'typeorm';
 
 import { existsQuery } from '@appcompass/common';
-import { Permission, Role, UserPermission, UserRole } from '@appcompass/common/entities';
+import { Permission, Role, UserPermission, UserRole } from '@appcompass/entities';
 import { Injectable } from '@nestjs/common';
 
 import { UserIdPayload } from '../dto/user-id.dto';

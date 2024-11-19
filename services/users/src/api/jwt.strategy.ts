@@ -4,7 +4,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { DataSource } from 'typeorm';
 
 import { DecodedToken } from '@appcompass/common';
-import { User } from '@appcompass/common/entities';
+import { User } from '@appcompass/entities';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';

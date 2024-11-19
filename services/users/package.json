@@ -8,10 +8,6 @@
   "bugs": {
     "url": "https://github.com/appcompass/users-microservice/issues"
   },
-  "funding": {
-    "type": "patreon",
-    "url": "https://www.patreon.com/jubeizon"
-  },
   "license": "MIT",
   "files": [
     "dist"
@@ -36,7 +32,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@appcompass/common": "workspace:^1.1.1",
+    "@appcompass/common": "1.1.1",
+    "@appcompass/entities": "1.0.0",
     "@nestjs/microservices": "^10.2.9",
     "@nestjs/typeorm": "^10.0.1",
     "pg": "^8.11.3",

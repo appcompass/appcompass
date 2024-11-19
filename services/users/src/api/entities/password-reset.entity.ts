@@ -1,6 +1,6 @@
 import { EntitySchema } from 'typeorm';
 
-import { PasswordReset as Entity } from '@appcompass/common/entities';
+import { PasswordReset as Entity } from '@appcompass/entities';
 
 export const PasswordReset = new EntitySchema<Entity>({
   name: 'PasswordReset',

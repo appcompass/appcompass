@@ -3,7 +3,7 @@ import * as crypto from 'crypto';
 import dayjs from 'dayjs';
 import { EntityManager } from 'typeorm';
 
-import { User } from '@appcompass/common/entities';
+import { User } from '@appcompass/entities';
 import { Injectable } from '@nestjs/common';
 
 import { RegisterUserDto } from '../dto/auth-register.dto';

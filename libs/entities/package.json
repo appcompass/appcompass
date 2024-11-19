@@ -1,0 +1,38 @@
+{
+  "name": "@appcompass/entities",
+  "version": "1.0.0",
+  "author": "dev@appcompass.com",
+  "license": "ISC",
+  "dependencies": {
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
+    "dayjs": "^1.11.10"
+  },
+  "description": "Entities of AppCompass",
+  "devDependencies": {
+    "@types/node": "^20.3.1",
+    "rimraf": "^5.0.5"
+  },
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": "https://github.com/Appcompass/appcompass",
+  "scripts": {
+    "build": "rimraf dist && tsc --project tsconfig.lib.json",
+    "format": "prettier --write \"src/**/*.ts\" && eslint \"src/**/*.ts\" --fix",
+    "lint": "prettier --check \"src/**/*.ts\" && eslint \"src/**/*.ts\""
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "dist/index.d.ts"
+      ]
+    }
+  }
+}
